@@ -46,5 +46,8 @@ namespace Business.Constans
         public static string RentalDeleted = "Araç kiralama silindi";
         public static string RentalGetAll = "Kiralanan araçlar listelendi";
 
+        public static string ImageAdded = "Resim eklendi";
+        public static string ImageDeleted = "Resim silindi";
+        public static string ImageUpdated = "Resim güncellendi";
     }
 }
