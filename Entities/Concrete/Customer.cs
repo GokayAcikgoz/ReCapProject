@@ -10,6 +10,8 @@ namespace Entities.Concrete
 {
     public class Customer :IEntity
     {
+        public int Id { get; set; }
+
         [Key]
         public int UserId { get; set; }
         public string CompanyName { get; set; }
