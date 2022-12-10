@@ -40,7 +40,7 @@ builder.Services.AddSwaggerGen();
 //builder.Services.AddSingleton<IUserService, UserManager>();
 //builder.Services.AddSingleton<IUserDal, EfUserDal>();
 
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -59,7 +59,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 builder.Services.AddDependencyResolvers(new ICoreModule[] { new CoreModule() });
-ServiceTool.Create(builder.Services);
+
+builder.Services.AddDependencyResolvers(new ICoreModule[]
+{
+    new CoreModule()
+});
 
 var app = builder.Build();
 

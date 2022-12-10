@@ -6,20 +6,20 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.CrossCuttingConcerns.Caching;
+using Core.CrossCuttingConcerns.Caching.Microsoft;
 using Microsoft.AspNetCore.Http;
 
 namespace Core.DependencyResolvers
 {
     public class CoreModule : ICoreModule
     {
-        public void Load(IServiceCollection services)
+        public void Load(IServiceCollection serviceCollection)
         {
-            services.AddMemoryCache();
-            //services.AddSingleton<ICacheManager, MemoryCacheManager>();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddSingleton<Stopwatch>();
+            serviceCollection.AddMemoryCache();
+            serviceCollection.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            serviceCollection.AddSingleton<ICacheManager, MemoryCacheManager>();
+            serviceCollection.AddSingleton<Stopwatch>();
         }
-
-
     }
 }

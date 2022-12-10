@@ -1,5 +1,8 @@
 ﻿using Castle.DynamicProxy;
 using System.Reflection;
+using Core.Aspects.Logging;
+using Core.Aspects.Performance;
+using Core.CrossCuttingConcerns.Logging.Log4Net.Loggers;
 
 namespace Core.Utilities.Interceptors
 {
@@ -14,6 +17,8 @@ namespace Core.Utilities.Interceptors
                 var methodAttributes = type.GetMethod(method.Name)
                     .GetCustomAttributes<MethodInterceptionBaseAttribute>(true);
                 classAttributes.AddRange(methodAttributes);
+                classAttributes.Add(new PerformanceAspect(5)); //performance aspectimi tüm projede çalıştırmak için istersem metodların üstünede yazabilirdim
+                classAttributes.Add(new LogAspect(typeof(FileLogger)));
 
                 return classAttributes.OrderBy(x => x.Priority).ToArray();
             }
